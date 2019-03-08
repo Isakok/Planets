@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D myRidudbody2D;
+    private Animator myAnimator;
+
     [SerializeField] private float movementSpeed;
     private bool facingRight;
 
@@ -13,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     {
         facingRight = true;
         myRidudbody2D = GetComponent<Rigidbody2D>();
+        myAnimator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -28,6 +31,8 @@ public class PlayerMovement : MonoBehaviour
     private void HandleMovement(float horizontal)
     {
         myRidudbody2D.velocity = new Vector2(horizontal * movementSpeed, myRidudbody2D.velocity.y);
+
+        myAnimator.SetFloat("speed", Mathf.Abs(horizontal));
     }
     
     private void Flip(float horizontal)
